@@ -28,5 +28,24 @@
     "wins": 14,
     "losses": 26,
     "points_scored": 28
+  },
+  {},
+  {
+    "id": 1000,
+    "wins": 10,
+    "losses": 3,
+    "points_scored": 7
+  },
+  {
+    "id": 1,
+    "wins": 16,
+    "losses": 0,
+    "points_scored": 9
+  },
+  {
+    "id": 2,
+    "wins": 4,
+    "losses": 13,
+    "points_scored": 2
   }
 ]

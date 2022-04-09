@@ -36,7 +36,7 @@ async function createPlayerStats(req, res, next) {
     stats.push(newStats);
     fs.writeFileSync(
       path.join(__dirname, "./stats.json"),
-      JSON.stringify(stats)
+      JSON.stringify(stats, null, 2)
     );
     res.status(201).json(newStats);
   } catch (error) {
@@ -56,9 +56,9 @@ async function updatePlayerStats(req, res, next) {
       error.status = 404;
       throw error;
     }
-    const { id, wins, losses, points_scored } = req.body;
+    const { wins, losses, points_scored } = req.body;
     const newStatsData = {
-      id: id,
+      id: parseInt(req.params.id),
       wins: wins,
       losses: losses,
       points_scored: points_scored,
@@ -72,7 +72,7 @@ async function updatePlayerStats(req, res, next) {
     });
     fs.writeFileSync(
       path.join(__dirname, "./stats.json"),
-      JSON.stringify(newStats)
+      JSON.stringify(newStats, null, 2)
     );
     res.status(200).json(newStatsData);
   } catch (error) {
@@ -83,7 +83,7 @@ async function updatePlayerStats(req, res, next) {
 async function deletePlayerStats(req, res, next) {
   try {
     const data = fs.readFileSync(path.join(__dirname, "./stats.json"));
-    const stats = JSON.parse(data);
+    const stats = await JSON.parse(data);
     const playerStats = stats.find(
       (player) => player.id === Number(req.params.id)
     );
@@ -103,7 +103,7 @@ async function deletePlayerStats(req, res, next) {
       .filter((player) => player !== null);
     fs.writeFileSync(
       path.join(__dirname, "./stats.json"),
-      JSON.stringify(newStats)
+      JSON.stringify(newStats, null, 2)
     );
     res.status(200).end();
   } catch (error) {
