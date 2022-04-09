@@ -12,7 +12,7 @@ app.set("env", NODE_ENV);
 app.use(logger("tiny"));
 app.use(express.json());
 
-app.use("/", require(path.join(__dirname, "routes")));
+app.use("/", require(path.join(__dirname, "routes/stats")));
 
 app.use((req, res, next) => {
   const error = new Error(`${req.method} ${req.url} Not Found`);
